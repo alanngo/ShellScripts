@@ -10,4 +10,4 @@ read MSG
 git pull origin $1
 git add $FILES
 git commit -m "$MSG"
-git push origin $2
+git push origin -u $2
