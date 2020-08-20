@@ -1,5 +1,5 @@
 #!/bin/sh
-# usage 
+# usage: ./commit.sh <PULL_BRANCH> <PUSH_BRANCH>
 
 echo "files > "
 read FILES
