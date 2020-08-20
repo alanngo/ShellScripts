@@ -2,7 +2,7 @@
 # usage 
 echo "enter pull branch > "
 read PULL_BRANCH
-if [PULL_BRANCH =""]; then
+if [$PULL_BRANCH =""]; then
     echo "Default pull branch is master"
     PULL_BRANCH="master"
 fi
@@ -14,7 +14,7 @@ read MSG
 
 echo "enter push branch > "
 read PUSH_BRANCH
-if [PUSH_BRANCH =""]; then
+if [$PUSH_BRANCH =""]; then
     echo "Default pull branch is master"
     PUSH_BRANCH="master"
 fi
