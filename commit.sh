@@ -1,5 +1,6 @@
 #!/bin/sh
-
+# usage: ./commit.sh => push and pull from master
+#        ./commit.sh <PULL_BRANCH> <PUSH_BRANCH>
 # pull
 if [ -z "$1" ]; then
     echo "DEFAULT: pulling from orign master"
