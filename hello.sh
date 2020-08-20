@@ -1,0 +1,1 @@
+echo "hello" #simple enough
