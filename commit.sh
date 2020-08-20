@@ -29,7 +29,7 @@ git commit -m "$MSG"
 # push
 if [ -z "$2" ]; then
     echo "DEFAULT: pushing to orign master"
-    git push origin -u origin master
+    git push -u origin master
 else
     echo "pushing to $2"
     git push origin -u $2
