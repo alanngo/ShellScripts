@@ -1,11 +1,4 @@
 #!/bin/sh
-# usage: ./commit.sh <PULL_BRANCH> <PUSH_BRANCH>
-
-# echo "files > "
-# read FILES
-
-# echo "commit message > "
-# read MSG
 
 # pull
 if [ -z "$1" ]; then
@@ -34,7 +27,3 @@ else
     echo "pushing to $2"
     git push origin -u $2
 fi
-# git pull origin $1
-# git add $FILES
-# git commit -m "$MSG"
-# git push origin -u $2
