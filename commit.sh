@@ -15,4 +15,4 @@ read PUSH_BRANCH
 git pull origin $PULL_BRANCH
 git add $FILES
 git commit -m "$MSG"
-git push origin 
+git push origin $PUSH_BRANCH
