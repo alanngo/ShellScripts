@@ -11,9 +11,11 @@ else
 fi
 
 # stage files
+git status
 echo "files > "
 read FILES
 git add $FILES
+git status
 
 #commit to local repository
 echo "commit message > "
