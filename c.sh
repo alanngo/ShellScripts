@@ -7,13 +7,23 @@ if [ -z "$1" ]; then
     exit
 fi
 
+# prompt for the main file
+echo "Name of main File: "
+read MAIN
+if [ -z "$MAIN" ]; then
+    echo "Provide a name to your main file! "
+    echo "exiting"
+    exit
+fi
+
 # create project w/ <PROJECT_NAME>
 mkdir $1
-echo "#include <stdio.h>">>$1"/main.c"
-echo "int main(int argc, char*argv[])">>$1"/main.c"
-echo "{">>$1"/main.c"
-echo "      return 0;">>$1"/main.c"
-echo "}">>$1"/main.c"
+echo "#include <stdio.h>">>$1"/"$MAIN".c"
+echo "">>$1"/"$MAIN".c"
+echo "int main(int argc, char*argv[])">>$1"/"$MAIN".c"
+echo "{">>$1"/"$MAIN".c"
+echo "      return 0;">>$1"/"$MAIN".c"
+echo "}">>$1"/"$MAIN".c"
 
 # create runner
 echo "rm -rf *.out">>"$1/run.sh"
