@@ -15,8 +15,6 @@ echo "{">>$1"/main.c"
 echo "      return 0;">>$1"/main.c"
 echo "}">>$1"/main.c"
 
-# done 
-
 # create runner
 echo "rm -rf *.out">>"$1/run.sh"
 echo "gcc -g *.c -lm -Wall">>"$1/run.sh"
@@ -27,3 +25,5 @@ echo "rm -rf *.out">>"$1/run.sh"
 echo "Use $1/run.sh to run your program"
 echo "1. $ cd $1"
 echo "2. $ ./run.sh"
+
+# done 
