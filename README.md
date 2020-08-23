@@ -4,7 +4,11 @@
 # Bash Shell
 ### 6627's favorite language
 
+<img src="tux.png" align = "left" width = 50 height = 60>
+
 #### Basic 
+<br>
+
 - we want to automate linux commands
 - know the following commands by heart
     - echo
@@ -19,12 +23,18 @@
 ```bash
 $ ./<SCRIPT_NAME>.sh
 ```
+<br>
+<img src="tux.png" align = "left" width = 50 height = 60>
+
 #### Comments
 
+<br>
 ```shell
 # this is a comment
 # don't catch you slippin now
 ```
+<br>
+<img src="tux.png" align = "left" width = 50 height = 60>
 
 #### Variables
 <b><i>Excplicit Declaration</i></b>
@@ -55,10 +65,19 @@ done
 ```
 <b><i>Environment Variables</i></b>
 - system/program info stored in variables
-- you can figure out their values by using 
+- you can figure out their values by using the command below
 ```shell
 $ echo $<ENV_VARIABLE> # replace <ENV_VARIABLE> w/ a variable from below
 ```
+- Useful commands when working w/ environment variables
+```bash
+$ env  # The command lists all of the environment variables in the shell.
+$ printenv # The command prints all environment variables.
+$ set # The command assigns or defines an environment variable.
+$ unset # The command deletes the environment variable. 
+$ export # The command exports the value of the newly assigned environment variable.
+```
+- list of common linux environment variables
 ```shell
 USER # The current logged in user.
 HOME #The home directory of the current user.
@@ -70,3 +89,4 @@ LANG # The current locales settings.
 TERM # The current terminal emulation.
 MAIL # Location of where the current user’s mail is stored.
 ```
+<br>
