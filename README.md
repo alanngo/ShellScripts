@@ -4,7 +4,8 @@
 # Bash Shell
 ### 6627's favorite language
 
-- automate linux commands
+#### Basic 
+- we want to automate linux commands
 - know the following commands by heart
     - echo
     - pwd
@@ -18,3 +19,36 @@
 ```bash
 $ ./<SCRIPT_NAME>.sh
 ```
+#### Comments
+
+```shell
+# this is a comment
+# don't catch you slippin now
+```
+
+#### Variables
+<b><i>Excplicit Declaration</i></b>
+```shell
+VAR = "sanjna" # declaring a variable explicitly
+echo $VAR # referencing a declared variable
+```
+<b><i>User Input</i></b>
+```shell
+read VAR # takes user input from keyboard
+echo $VAR # referencing a declared variable
+```
+<b><i>Positional Command Line Argument</i></b>
+```shell
+echo $1 # prints first arg
+echo $2 # prints second arg
+...
+echo ${10} # prints the 10th argument 
+echo ${20} # prints the 20th argument
+# arguments after 9th must be enclosed in {}
+```
+<i>Iterate thru Command Line Argument</i>
+```shell
+for ARG in "$@"
+do
+    echo $ARG
+done
