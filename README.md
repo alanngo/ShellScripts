@@ -57,6 +57,16 @@ done
 - system/program info stored in variables
 - you can figure out their values by using 
 ```shell
-$ echo $<ENV_VARIABLE> # replace $<ENV_VARIABLE> w/ a variable from below
+$ echo $<ENV_VARIABLE> # replace <ENV_VARIABLE> w/ a variable from below
 ```
-<img src ="https://phoenixts.com/wp-content/uploads/2016/02/environmentvariables.png" width = 500 height = 2500>
+```shell
+USER # The current logged in user.
+HOME #The home directory of the current user.
+EDITOR # The default file editor to be used i.e: vim, nano, emacs, ect... 
+SHELL # The path of the current user’s shell, such as bash or zsh.
+LOGNAME # The name of the current user.
+PATH # A list of directories to be searched when executing commands. 
+LANG # The current locales settings.
+TERM # The current terminal emulation.
+MAIL # Location of where the current user’s mail is stored.
+```
