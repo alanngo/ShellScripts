@@ -52,3 +52,11 @@ for ARG in "$@"
 do
     echo $ARG
 done
+```
+<b><i>Environment Variables</i></b>
+- system/program info stored in variables
+- you can figure out their values by using 
+```shell
+$ echo $<ENV_VARIABLE> # replace $<ENV_VARIABLE> w/ a variable from below
+```
+<img src ="https://phoenixts.com/wp-content/uploads/2016/02/environmentvariables.png" width = 500 height = 2500>
