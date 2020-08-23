@@ -4,10 +4,11 @@
 # Bash Shell
 ### 6627's favorite language
 
+<br>
 <img src="tux.png" align = "left" width = 50 height = 60>
 
 #### Basic 
-<br>
+
 
 - we want to automate linux commands
 - know the following commands by heart
@@ -27,8 +28,6 @@ $ ./<SCRIPT_NAME>.sh
 <img src="tux.png" align = "left" width = 50 height = 60>
 
 #### Comments
-
-<br>
 
 ```shell
 # this is a comment
