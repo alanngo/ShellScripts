@@ -22,7 +22,8 @@
     - git commands
 - how to run a shell script
 ```bash
-$ ./<SCRIPT_NAME>.sh
+$ ./<SCRIPT_NAME>.sh # use this for running shell scripts from working directory
+$ sh <SCRIPT_NAME> # use this for running shell scripts from different directory
 ```
 <br>
 <img src="tux.png" align = "left" width = 50 height = 60>
