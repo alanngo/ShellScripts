@@ -9,7 +9,7 @@
 
 #### Basic 
 
-
+- BE CAREFUL W/ SPACES
 - we want to automate linux commands
 - know the following commands by heart
     - echo
@@ -40,7 +40,7 @@ $ sh <SCRIPT_NAME> # use this for running shell scripts from different directory
 #### Variables
 <b><i>Excplicit Declaration</i></b>
 ```shell
-VAR = "sanjna" # declaring a variable explicitly
+VAR="sanjna" # declaring a variable explicitly
 echo $VAR # referencing a declared variable
 ```
 <b><i>User Input</i></b>
@@ -91,3 +91,33 @@ TERM # The current terminal emulation.
 MAIL # Location of where the current user’s mail is stored.
 ```
 <br>
+<img src="tux.png" align = "left" width = 50 height = 60>
+
+#### Arrays
+- they are dynamically sized
+- they are loosely typed
+- zero-based indexed
+```shell
+ARRAY=(1 2 3 4 5) # declaring an array
+```
+
+This is how to print arrays
+```shell
+# print the whole array
+echo ${ARRAY[@]}
+echo ${ARRAY[*]}
+# * and @ means all
+```
+```shell
+# print the array in a certain range
+echo ${ARRAY[@]:1} # gives us 2 3 4 5
+echo ${ARRAY[*]:1:3} # gives us 2 3 
+# ${ARRAY[*]:<START>:<COUNT_ELEMENT>} => array from index <START> and count 
+# the number of elements specified by <COUNT_ELEMENT>
+# if no count is specified, it will be from <START> to end of array
+```
+How to access arrays at a certain index
+```shell
+# print an array at a certain index
+echo ${ARRAY[2]} # gives us 3
+```
