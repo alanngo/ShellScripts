@@ -23,7 +23,8 @@
 - how to run a shell script
 ```bash
 $ ./<SCRIPT_NAME>.sh # use this for running shell scripts from working directory
-$ sh <SCRIPT_NAME> # use this for running shell scripts from different directory
+$ sh <SCRIPT_NAME>.sh # use this for running shell scripts from different directory
+$ bash <SCRIPT_NAME>.sh # running a script using bash command
 ```
 <br>
 <img src="tux.png" align = "left" width = 50 height = 60>
@@ -116,8 +117,11 @@ echo ${ARRAY[*]:1:3} # gives us 2 3
 # the number of elements specified by <COUNT_ELEMENT>
 # if no count is specified, it will be from <START> to end of array
 ```
-How to access arrays at a certain index
+How to access array properties
 ```shell
 # print an array at a certain index
 echo ${ARRAY[2]} # gives us 3
+
+# print the size of an array
+echo ${#ARRAY[*]} # gives us 5
 ```
