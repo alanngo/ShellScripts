@@ -117,6 +117,12 @@ echo ${ARRAY[*]:1:3} # gives us 2 3
 # the number of elements specified by <COUNT_ELEMENT>
 # if no count is specified, it will be from <START> to end of array
 ```
+```shell
+# using for loop
+for e in "${ARRAY[*]}; do
+    echo $e
+done
+```
 How to access array properties
 ```shell
 # print an array at a certain index
