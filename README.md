@@ -94,6 +94,112 @@ MAIL # Location of where the current user’s mail is stored.
 <br>
 <img src="tux.png" align = "left" width = 50 height = 60>
 
+#### Conditionals
+- SPACES MATTER in between brackets and expression
+- 4 kinds
+    - if 
+    - else
+    - elif
+    - case
+- comparison operators
+<table>
+<tr>
+    <td><b>Operator</b></td>
+    <td><b>Functionality</b></td>
+    <td><b>Example</b></td>
+</tr>
+<tr>
+    <td>==</td>
+    <td>two strings are equal</td>
+    <td>$VAR1 == $VAR2</td>
+</tr>
+<tr>
+    <td>!=</td>
+    <td>two strings are NOT equal</td>
+    <td>$VAR1 != $VAR2</td>
+</tr>
+<tr>
+    <td><</td>
+    <td>less than for strings</td>
+    <td>$VAR1 < $VAR2</td>
+</tr>
+<tr>
+    <td>></td>
+    <td>greater than for strings</td>
+    <td>$VAR1 > $VAR2</td>
+</tr>
+<tr>
+    <td>-n</td>
+    <td>string length > 0</td>
+    <td>-n $VAR1</td>
+</tr>
+<tr>
+    <td>-z</td>
+    <td>string length == 0</td>
+    <td>-z $VAR1</td>
+</tr>
+<tr>
+    <td>-eq</td>
+    <td>two numbers are equal</td>
+    <td>$num1 -eq $num2</td>
+</tr>
+<tr>
+    <td>-ne</td>
+    <td>two numbers are NOT equal</td>
+    <td>$num1 -ne $num2</td>
+</tr>
+<tr>
+    <td>-lt</td>
+    <td>less than for numbers</td>
+    <td>$num1 -lt $num2</td>
+</tr>
+<tr>
+    <td>-le</td>
+    <td>less than or equals for numbers</td>
+    <td>$num1 -le $num2</td>
+</tr>
+<tr>
+    <td>-gt</td>
+    <td>greater than for numbers</td>
+    <td>$num1 -gt $num2</td>
+</tr>
+<tr>
+    <td>-ge</td>
+    <td>greater than or equals for numbers</td>
+    <td>$num1 -ge $num2</td>
+</tr>
+</table>
+
+if, else, elif, else
+```shell
+if [ expression ]; then # need a space between brackets 
+   ...
+elif [ expression ]; then
+    ...
+else
+    ...
+fi # DO NOT FORGET THE FINISH CLAUSE!
+```
+case
+```shell
+case $VAR in
+    pattern1)
+    ...
+    ;; # don't forget the terminating statements
+    pattern2)
+    ...
+    ;;
+    pattern3)
+    ...
+    ;;
+    *) # default case
+    echo "default case "
+esac # finish clause for case
+```
+
+<br>
+<img src="tux.png" align = "left" width = 50 height = 60>
+
 #### Arrays
 - they are dynamically sized
 - they are loosely typed
