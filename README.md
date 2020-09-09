@@ -197,6 +197,7 @@ case $VAR in
 esac # finish clause for case
 ```
 
+
 <br>
 <img src="tux.png" align = "left" width = 50 height = 60>
 
