@@ -2,7 +2,7 @@ echo "enter a programming language"
 read FAV_LANG
 
 case $FAV_LANG in
-    shell|sql) # compounded case, DO NOT USE QUOTES
+    "shell"|"sql") # compounded case
     echo "6627's favorite language"
     ;; # don't forget the terminating statements
     "java")
