@@ -40,16 +40,19 @@ $ bash <SCRIPT_NAME>.sh # running a script using bash command
 
 #### Variables
 <b><i>Excplicit Declaration</i></b>
+
 ```shell
 VAR="sanjna" # declaring a variable explicitly
 echo $VAR # referencing a declared variable
 ```
 <b><i>User Input</i></b>
+
 ```shell
 read VAR # takes user input from keyboard
 echo $VAR # referencing a declared variable
 ```
 <b><i>Positional Command Line Argument</i></b>
+
 ```shell
 echo $1 # prints first arg
 echo $2 # prints second arg
@@ -59,6 +62,7 @@ echo ${20} # prints the 20th argument
 # arguments after 9th must be enclosed in {}
 ```
 <i>Iterate thru Command Line Argument</i>
+
 ```shell
 for ARG in "$@"
 do
@@ -66,12 +70,15 @@ do
 done
 ```
 <b><i>Environment Variables</i></b>
+
 - system/program info stored in variables
 - you can figure out their values by using the command below
+
 ```shell
 $ echo $<ENV_VARIABLE> # replace <ENV_VARIABLE> w/ a variable from below
 ```
 - Useful commands when working w/ environment variables
+
 ```bash
 $ env  # The command lists all of the environment variables in the shell.
 $ printenv # The command prints all environment variables.
@@ -80,6 +87,7 @@ $ unset # The command deletes the environment variable.
 $ export # The command exports the value of the newly assigned environment variable.
 ```
 - list of common linux environment variables
+
 ```shell
 USER # The current logged in user.
 HOME #The home directory of the current user.
@@ -197,6 +205,26 @@ case $VAR in
 esac # finish clause for case
 ```
 
+<br>
+<img src="tux.png" align = "left" width = 50 height = 60>
+
+#### Loops
+- while
+- for
+
+```shell
+# standard while loop
+while [ condition ]; do  # spaces matter between brackets
+    ...
+done # don't forget the done clause
+```
+
+```shell
+# infinite while loop
+while : do  # ':' will always evaluate to true
+    ...
+done # don't forget the done clause
+```
 
 <br>
 <img src="tux.png" align = "left" width = 50 height = 60>

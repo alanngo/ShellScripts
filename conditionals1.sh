@@ -1,3 +1,4 @@
+#!/bin/bash
 echo "enter a programming language"
 read FAV_LANG
 
