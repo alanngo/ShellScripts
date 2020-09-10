@@ -64,7 +64,7 @@ echo ${20} # prints the 20th argument
 <i>Iterate thru Command Line Argument</i>
 
 ```shell
-for ARG in "$@"
+for ARG in "$*"
 do
     echo $ARG
 done
@@ -221,7 +221,14 @@ done # don't forget the done clause
 
 ```shell
 # infinite while loop
-while : do  # ':' will always evaluate to true
+while :  # ':' will always evaluate to true
+do 
+    ...
+done # don't forget the done clause
+```
+```shell
+# for loop
+for var in v0 v1 v2 ... vN; do  # set of words
     ...
 done # don't forget the done clause
 ```
@@ -233,6 +240,7 @@ done # don't forget the done clause
 - they are dynamically sized
 - they are loosely typed
 - zero-based indexed
+
 ```shell
 ARRAY=(1 2 3 4 5) # declaring an array
 ```
