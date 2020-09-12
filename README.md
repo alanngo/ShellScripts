@@ -274,3 +274,43 @@ echo ${ARRAY[2]} # gives us 3
 # print the size of an array
 echo ${#ARRAY[*]} # gives us 5
 ```
+
+<br>
+<img src="tux.png" align = "left" width = 50 height = 60>
+
+#### Functions
+- can take 0 or multiple arguments
+- called differently than other programming languages
+- use these for large-scale automation
+
+Defining and calling a function method 1
+```shell
+foo() # defining foo
+{
+    ... # do stuff
+}
+
+foo # calling foo DO NOT USE ()
+```
+Defining and calling a function method 2 USE THIS METHOD
+```shell
+function foo() # defining foo by using 'function keyword'
+{
+    ... # do stuff
+}
+
+foo # calling foo DO NOT USE ()
+```
+
+Defining and calling a function with arguments
+```shell
+function foo() # defining foo by using 'function keyword'
+{
+    # use the 'local' keyword to declare variables in the functions scope
+    local A1=$1
+    local A2=$2
+    ...
+}
+
+foo # calling foo DO NOT USE ()
+```
