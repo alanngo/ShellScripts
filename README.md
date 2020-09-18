@@ -24,7 +24,7 @@
 ```bash
 $ ./<SCRIPT_NAME>.sh # use this for running shell scripts from working directory
 $ sh <SCRIPT_NAME>.sh # use this for running shell scripts from different directory
-$ bash <SCRIPT_NAME>.sh # running a script using bash command
+$ bash <SCRIPT_NAME>.sh # running a script using bash command 
 ```
 <br>
 <img src="tux.png" align = "left" width = 50 height = 60>
