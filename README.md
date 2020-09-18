@@ -304,12 +304,22 @@ foo # calling foo DO NOT USE ()
 
 Defining and calling a function with arguments
 ```shell
-function foo() # defining foo by using 'function keyword'
+function foo()
 {
     # use the 'local' keyword to declare variables in the functions scope
     local A1=$1
     local A2=$2
     ...
+}
+
+foo # calling foo DO NOT USE ()
+```
+
+Returning a value from a function
+```shell
+function foo() # defining foo by using 'function keyword'
+{
+    return 123
 }
 
 foo # calling foo DO NOT USE ()
