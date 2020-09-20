@@ -25,6 +25,7 @@
 $ ./<SCRIPT_NAME>.sh # use this for running shell scripts from working directory
 $ sh <SCRIPT_NAME>.sh # use this for running shell scripts from different directory
 $ bash <SCRIPT_NAME>.sh # running a script using bash command 
+$ zsh <SCRIPT_NAME>.sh # running a script using zsh command 
 ```
 <br>
 <img src="tux.png" align = "left" width = 50 height = 60>
@@ -211,6 +212,7 @@ esac # finish clause for case
 #### Loops
 - while
 - for
+- until
 
 ```shell
 # standard while loop
@@ -229,6 +231,12 @@ done # don't forget the done clause
 ```shell
 # for loop
 for var in v0 v1 v2 ... vN; do  # set of words
+    ...
+done # don't forget the done clause
+```
+```shell
+# until loop
+until [ condition ]; do
     ...
 done # don't forget the done clause
 ```
