@@ -1,5 +1,5 @@
 
-ARR=( "java" "shell" "sql" "chromebook" "macbook" "environment variables") # declaring an array
+ARR=( "java" "shell" "sql" "chromebook" "macbook" "research" "flask" ) # declaring an array
 echo "6627 loves" ${ARR[*]} # print all elements in array
 
 echo "6627 REALLY loves" ${ARR[1]} # print the element @ index 1      
