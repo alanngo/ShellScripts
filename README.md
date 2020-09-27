@@ -46,6 +46,48 @@ $ zsh <SCRIPT_NAME>.sh # running a script using zsh command
 VAR="sanjna" # declaring a variable explicitly
 echo $VAR # referencing a declared variable
 ```
+
+<b><i>Numerical values</i></b>
+
+```shell
+declare -i X=43 # declaring an int variable
+echo $X # treat '43' as a string
+echo $(( X )) # treat '43' as a number
+```
+
+<table>
+    <tr>
+        <td><b>Operator</b></td>
+        <td><b>Functionality</b></td>
+        <td><b>Example</b></td>
+    </tr>
+    <tr>
+        <td>+</td>
+        <td>addition</td>
+        <td>$(( X + Y ))</td>
+    </tr>
+    <tr>
+        <td>-</td>
+        <td>subtraction</td>
+        <td>$(( X - Y ))</td>
+    </tr>
+    <tr>
+        <td>*</td>
+        <td>multiplication</td>
+        <td>$(( X * Y ))</td>
+    </tr>
+    <tr>
+        <td>/</td>
+        <td>division</td>
+        <td>$(( X / Y ))</td>
+    </tr>
+    <tr>
+        <td>%</td>
+        <td>modulus</td>
+        <td>$(( X % Y ))</td>
+    </tr>
+</table>
+
 <b><i>User Input</i></b>
 
 ```shell
