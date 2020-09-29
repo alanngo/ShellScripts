@@ -2,7 +2,6 @@
 <img src="shell.jpg" align="right" width = 100 height=100>
 
 # Bash Shell
-### 6627's favorite language
 
 <br>
 <img src="tux.png" align = "left" width = 50 height = 60>
