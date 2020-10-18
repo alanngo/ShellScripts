@@ -51,11 +51,27 @@ gunicorn==20.0.4
 pymongo==3.11.0" >> $DIR"/requirements.txt"
 
 # create subdirectories
-SUB_DIR=("api" "repository" "service" "util")
+SUB_DIR=("api" "repository" "service" "test" "util")
 for E in ${SUB_DIR[*]}; do
     echo -e "${BLUE}Creating $DIR"/"$E"
     mkdir $DIR"/"$E
 done
+
+# create unit tests
+echo -e "${BLUE}Creating $DIR/test/tests.py"
+echo "
+import unittest
+
+
+# TODO: write unit tests
+class MyTestCase(unittest.TestCase):
+    def test_something(self):
+        pass
+
+
+if __name__ == '__main__':
+    unittest.main()
+">>$DIR"/test/tests.py"
 
 # create error logging file
 echo "import logging
