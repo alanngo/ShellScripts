@@ -57,6 +57,15 @@ for E in ${SUB_DIR[*]}; do
     mkdir $DIR"/"$E
 done
 
+# database cradentials
+echo -e "${BLUE}Creating $DIR/repository/database.py"
+echo "
+DATABASE = 'ENTER DB NAME HERE'
+HOST = 'ENTER HOST HERE'
+PORT = 'ENTER PORT HERE' # enter as an int value
+URI = 'ENTER DB URI HERE'
+" >> $DIR"/repository/database.py"
+
 # create unit tests
 echo -e "${BLUE}Creating $DIR/test/tests.py"
 echo "
