@@ -15,7 +15,6 @@
 
 ## How to integrate w/ your workflow
 
-```bash
-$ cat {SH file} >> ~/{SH file}
-$ echo alias {ALIAS_NAME}='bash ~/{SH file}'
-```
+1. run ``$ bash integrate.sh <SHELL_SCRIPT> <ALIAS>``
+2. restart your terminal
+3. use ``$ <ALIAS>`` to run your automated shell script
