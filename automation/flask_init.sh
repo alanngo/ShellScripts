@@ -24,7 +24,7 @@ app.register_blueprint(advice)
 
 @app.route('/', methods=['GET'])
 def index():
-    return 'hello world'
+    return {'mssg':'Totally Accurate Battle Simulator is the best game ever'}
 
 if __name__ == '__main__':
     CORS(app) # lets other programs consume app
@@ -53,8 +53,7 @@ pymongo==3.11.0" >> $DIR"/requirements.txt"
 # create subdirectories
 SUB_DIR=("api" "repository" "exception" "service" "test" "util")
 for E in ${SUB_DIR[*]}; do
-    echo -e "${BLUE}Creating $DIR"/"$E"
-    mkdir $DIR"/"$E
+    echo -e "${BLUE}Creating $DIR"/"$E" && mkdir $DIR"/"$E   
 done
 
 # database cradentials
