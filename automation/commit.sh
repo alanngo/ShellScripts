@@ -4,12 +4,12 @@
 INFO='\u001b[34m'
 SUCCESS='\u001b[32m'
 NORMAL='\u001b[37m'
+
+PULL=${1:-"master"}
+PUSH=${2:-"master"}
 # pull
-if [ -z "$1" ]; then
-    git pull origin master && echo -e ${INFO} "DEFAULT: pulling from orign master"${NORMAL} 
-else
-    git pull origin $1 && echo -e ${INFO} "pulling from $1"${NORMAL}
-fi
+git pull origin $PULL && echo -e ${INFO}"Pulling from $PULL"${NORMAL}
+
 
 # stage files
 git status
@@ -24,10 +24,7 @@ read MSG
 git commit -m "$MSG"
 
 # push
-if [ -z "$2" ]; then
-    git push -u origin master && echo -e ${INFO}"DEFAULT: pushing to orign master"${NORMAL} 
-else
-    git push origin -u $2 && echo -e ${INFO}"pushing to $2"${NORMAL}   
-fi
+git push -u origin $PUSH && echo -e ${INFO}"Pushing to $PUSH" 
 
-echo -e ${SUCCESS}"Successfully pushed to remote"
+
+echo -e ${SUCCESS}"Successfully pushed to remote"${NORMAL}  

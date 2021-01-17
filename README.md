@@ -111,6 +111,17 @@ do
     echo $ARG
 done
 ```
+
+<b><i>Optional-Value Variables</i></b>
+  
+  - replaces empty checks
+  - much cleaner way to deal with optional variables
+  
+```bash
+YOUTUBER=${1:-"Linus Tech Tips"} # if first arg is not present, default to Linus Tech Tips
+```
+
+
 <b><i>Environment Variables</i></b>
 
 - system/program info stored in variables
