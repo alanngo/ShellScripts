@@ -11,9 +11,7 @@ if [ -z $1 ]; then
 fi
 mkdir ${1}
 mkdir ${1}'/src'
-sudo npm install --prefix ${1} nodemon --save-dev && echo -e "${BLUE} installing nodemon"
-sudo npm install --prefix ${1} express --save && echo -e "${BLUE} installing express"
-sudo npm install --prefix ${1} cors --save && echo -e "${BLUE} installing cors"
+
 echo '{
   "name"': '"'${1}'"'',
   "version": "1.0.0",
@@ -37,7 +35,7 @@ echo '{
 
 echo 'import express from "express"
 import cors from "cors"
-const PORT = 3200
+const PORT = process.env.PORT||3200
 const APP = express()
 
 // set up body parser
@@ -53,5 +51,9 @@ APP.get(`/`, (req, res) =>
 
 APP.listen(PORT, () => console.log(`http://localhost:${PORT}`))' >>${1}'/src/index.js'
 
-echo -e ${GREEN}"To run your express app, use $ npm start"
+sudo npm install --prefix $1 
+
+echo -e ${GREEN}"To run your express app, run the following commands."
+echo -e ${GREEN} "1. $ cd $1"
+echo -e ${GREEN} "2. $ npm install && npm start"
 echo -e ${GREEN}"If you are having problems w/ running your app, use $ pkill -9 node && npm start"
