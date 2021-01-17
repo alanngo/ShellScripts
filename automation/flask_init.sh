@@ -4,14 +4,12 @@ BLUE='\u001b[34m'
 YELLOW='\u001b[33m'
 
 # usage
-DIR=$1
+DIR=${1:-"."}
 echo "creating flask project..."
-if [ -z $DIR ]; then
-    echo -e ${RED}"Usage: $ ./flask_init <ROJECT_NAME>"
-    exit
-fi
 
-mkdir $DIR
+if [ $DIR != "." ]; then
+  mkdir $DIR
+fi
 
 # main app
 echo "
@@ -40,6 +38,7 @@ echo ".idea/
 */sandbox.*
 */*.log
 */**/__pycache*
+err.log
 */*.diff" >> $DIR"/.gitignore"
 
 # create install requirements
@@ -113,5 +112,6 @@ def handle_general_error(e: Exception):
 # getting started
 echo -e "${YELLOW}Prerequisites:
 $ cd $DIR
-$ pip install -r requirements.txt"
+$ pip install -r requirements.txt
+$ python3 app.py"
 echo -e "${GREEN}DONE! Happy devloping :)"
