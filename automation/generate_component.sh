@@ -45,7 +45,7 @@ if [ -z $COMP_NAME ]; then
 fi
 
 DIR=${2:-"."}
-echo "create functional component? "
+echo "create functional component? y/n"
 read FUNCTIONAL
 
 if [ $FUNCTIONAL == 'y' ] || [ $FUNCTIONAL == 'Y' ]; then
