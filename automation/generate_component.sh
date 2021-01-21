@@ -1,6 +1,7 @@
 function classComp()
 {
     local COMP_NAME=$1
+    local DIR=$2
     echo "
     import React, {Component} from 'react';
     class $COMP_NAME extends Component 
@@ -15,12 +16,13 @@ function classComp()
             )
         }
     }
-    export default $COMP_NAME;" >>$COMP_NAME".js"
+    export default $COMP_NAME;" >>$DIR"/"$COMP_NAME".js"
 }
 
 function funcComp()
 {
     local COMP_NAME=$1
+    local DIR=$2
     echo "
     import React from 'react';
 
@@ -33,16 +35,22 @@ function funcComp()
         )
     }
 
-    export default $COMP_NAME;" >>$COMP_NAME".js"
+    export default $COMP_NAME;" >>$DIR"/"$COMP_NAME".js"
 }
 
 COMP_NAME=$1
+if [ -z $COMP_NAME ]; then
+    echo "Usage: bash generate_component.sh <COMPONENT NAME> optional: <DIRECTORY>"
+    exit
+fi
+
+DIR=${2:-"."}
 echo "create functional component? "
 read FUNCTIONAL
 
 if [ $FUNCTIONAL == 'y' ] || [ $FUNCTIONAL == 'Y' ]; then
-    funcComp $COMP_NAME
+    funcComp $COMP_NAME $DIR
 else 
-    classComp $COMP_NAME
+    classComp $COMP_NAME $DIR
 fi
 echo "done"
