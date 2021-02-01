@@ -16,7 +16,7 @@ function classComp()
             )
         }
     }
-    export default $COMP_NAME;" >>$DIR"/"$COMP_NAME".js"
+    export default $COMP_NAME;" >>$DIR"/"$COMP_NAME".jsx"
 }
 
 function funcComp()
@@ -35,7 +35,7 @@ function funcComp()
         )
     }
 
-    export default $COMP_NAME;" >>$DIR"/"$COMP_NAME".js"
+    export default $COMP_NAME;" >>$DIR"/"$COMP_NAME".jsx"
 }
 
 COMP_NAME=$1
