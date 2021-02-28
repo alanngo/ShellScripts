@@ -8,6 +8,7 @@
 - cpp.sh: create a new C++ project
 - express.sh: create a new ExpressJS project
 - flask_init.sh: create a new flask project
+- generate_component.sh: create a new react component
 - java.sh: create a new java project
 - proc_kill.sh: kill multiple processes
 - py.sh: create a new python project

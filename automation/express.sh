@@ -12,14 +12,16 @@ fi
 mkdir $PROJECT'/src'
 
 echo '{
-  "name"': '"my-project"'',
+  "name": "my-project",
   "version": "1.0.0",
   "description": "sample app created with automation",
   "main": "src/index.js",
-  "type":"module",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon src/index.js"
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "clean": "rm -rf node_modules package-lock.json && npm install"
   },
   "author": "",
   "license": "ISC",
@@ -30,7 +32,8 @@ echo '{
     "cors": "^2.8.5",
     "express": "^4.17.1"
   }
-}'>> $PROJECT'/package.json'
+}
+'>> $PROJECT'/package.json'
 
 echo 'import express from "express"
 import cors from "cors"
