@@ -3,20 +3,20 @@ function classComp()
     local COMP_NAME=$1
     local DIR=$2
     echo "
-    import React, {Component} from 'react';
-    class $COMP_NAME extends Component 
-    {
+import React, {Component} from 'react';
+class $COMP_NAME extends Component 
+{
 
-        render()
-        {
-            return (
-            <div className='$COMP_NAME'>
-            <h1>Implement $COMP_NAME</h1>
-            </div>
-            )
-        }
+    render()
+    {
+        return (
+        <div className='$COMP_NAME'>
+        <h1>Implement $COMP_NAME</h1>
+        </div>
+        )
     }
-    export default $COMP_NAME;" >>$DIR"/"$COMP_NAME".jsx"
+}
+export default $COMP_NAME;" >>$DIR"/"$COMP_NAME".jsx"
 }
 
 function funcComp()
@@ -24,31 +24,31 @@ function funcComp()
     local COMP_NAME=$1
     local DIR=$2
     echo "
-    import React from 'react';
+import React from 'react';
 
-    const $COMP_NAME = () => 
-    {
-        return (
-            <div className='$COMP_NAME'>
-            <h1>Implement $COMP_NAME</h1>
-            </div>
-        )
-    }
-
-    export default $COMP_NAME;" >>$DIR"/"$COMP_NAME".jsx"
+const $COMP_NAME = () => 
+{
+    return (
+        <div className='$COMP_NAME'>
+        <h1>Implement $COMP_NAME</h1>
+        </div>
+    )
 }
 
-COMP_NAME=$1
-if [ -z $COMP_NAME ]; then
-    echo "Usage: bash generate_component.sh <COMPONENT NAME> optional: <DIRECTORY>"
-    exit
+export default $COMP_NAME;" >>$DIR"/"$COMP_NAME".jsx"
+}
+
+COMP_NAME=${1:-"MyComponent"}
+if [ $COMP_NAME == 'help' ]; then
+    echo "DEFAULT: create functional component in current dir"
+    echo "ARGS: <COMPONENT_NAME> <DIRECTORY> <FUNCTIONAL>"
+    echo "RECCOMMENDED: bash generate_component.sh <COMPONENT_NAME>"
+    exit 0
 fi
-
 DIR=${2:-"."}
-echo "create functional component? y/n"
-read FUNCTIONAL
+FUNCTIONAL=${3:-"f"}
 
-if [ $FUNCTIONAL == 'y' ] || [ $FUNCTIONAL == 'Y' ]; then
+if [ $FUNCTIONAL == 'f' ] || [ $FUNCTIONAL == 'F' ]; then
     funcComp $COMP_NAME $DIR
 else 
     classComp $COMP_NAME $DIR
