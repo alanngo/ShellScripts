@@ -10,11 +10,6 @@ function api()
 
 
 MY_URL=$1
-METHOD=$2
-if [ -z "$METHOD" ]; then
-  echo "default: using GET method"
-  api $MY_URL "GET"
-  exit
-fi
-  echo "using $METHOD method"
-  api $MY_URL $METHOD
+METHOD=${2:-"GET"}
+echo "using $METHOD method"
+api $MY_URL $METHOD
