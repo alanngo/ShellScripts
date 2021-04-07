@@ -5,10 +5,7 @@ YELLOW='\u001b[33m'
 WHITE='\u001b[37m'
 PROJECT=${1:-"."}
 
-if [ $PROJECT != "." ]; then
-  mkdir $PROJECT
-fi
-
+mkdir $PROJECT
 mkdir $PROJECT'/src'
 
 echo '{
@@ -55,7 +52,7 @@ APP.listen(PORT, () => console.log(`http://localhost:${PORT}`))' >>$PROJECT'/src
 
 # .gitignore
 echo "node_modules" >> $PROJECT"/.gitignore"
-
+echo "$PROJECT" >> $PROJECT"/README.md"
 sudo npm install --prefix $PROJECT 
 
 echo -e ${GREEN}"To run your express app, run the following commands."
