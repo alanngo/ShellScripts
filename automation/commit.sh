@@ -8,6 +8,8 @@ NORMAL='\u001b[37m'
 PULL=${1:-"master"}
 PUSH=${2:-"master"}
 REMOTE=${3:-"origin"}
+
+echo $REMOTE
 # pull
 git pull $REMOTE $PULL && echo -e ${INFO}"Pulling from $PULL"${NORMAL}
 
@@ -25,7 +27,7 @@ read MSG
 git commit -m "$MSG"
 
 # push
-git push -u $REMOTE $PUSH && echo -e ${INFO}"Pushing to $REMOTE $PUSH" 
+git push -u $REMOTE $PUSH && echo -e ${INFO}"Pushing to $REMOTE/$PUSH" 
 
 
 echo -e ${SUCCESS}"Successfully pushed to remote"${NORMAL}  
