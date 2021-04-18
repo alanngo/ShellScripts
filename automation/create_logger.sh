@@ -1,4 +1,4 @@
-function es6
+function es6()
 {
     echo "
 import fs from 'fs'
@@ -16,7 +16,7 @@ const LOG = (arg, color, type) =>
     fs.appendFile('debug.log', PREFIX+' '+arg+'\n', (err)=>
     {
         if (err) throw err
-        console.log(color+' ' +PREFIX+WHITE+':'+color, arg)
+        console.log(color+' ' +PREFIX+WHITE+':'+color, arg, WHITE)
     })
 }
 
@@ -48,7 +48,7 @@ const LOG = (arg, color, type) =>
     fs.appendFile('debug.log', PREFIX+' '+arg+'\n', (err)=>
     {
         if (err) throw err
-        console.log(color+' ' +PREFIX+WHITE+':'+color, arg)
+        console.log(color+' ' +PREFIX+WHITE+':'+color, arg, WHITE)
     })
 }
 
