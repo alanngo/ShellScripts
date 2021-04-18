@@ -7,11 +7,12 @@ NORMAL='\u001b[37m'
 
 PULL=${1:-"master"}
 PUSH=${2:-"master"}
-REMOTE=${3:-"origin"}
+REMOTE_PULL=${3:-"origin"}
+REMOTE_PUSH=${4:-"origin"}
 
 echo $REMOTE
 # pull
-git pull $REMOTE $PULL && echo -e ${INFO}"Pulling from $PULL"${NORMAL}
+git pull $REMOTE_PULL $PULL && echo -e ${INFO}"Pulling from $PULL"${NORMAL}
 
 
 # stage files
@@ -27,7 +28,7 @@ read MSG
 git commit -m "$MSG"
 
 # push
-git push -u $REMOTE $PUSH && echo -e ${INFO}"Pushing to $REMOTE/$PUSH" 
+git push -u $REMOTE_PUSH $PUSH && echo -e ${INFO}"Pushing to $REMOTE/$PUSH" 
 
 
 echo -e ${SUCCESS}"Successfully pushed to remote"${NORMAL}  
