@@ -28,7 +28,7 @@ read MSG
 git commit -m "$MSG"
 
 # push
-git push -u $REMOTE_PUSH $PUSH && echo -e ${INFO}"Pushing to $REMOTE/$PUSH" 
+git push -u $REMOTE_PUSH $PUSH && echo -e ${INFO}"Pushing to $REMOTE_PUSH/$PUSH" 
 
 
 echo -e ${SUCCESS}"Successfully pushed to remote"${NORMAL}  
