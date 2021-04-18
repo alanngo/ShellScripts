@@ -7,7 +7,7 @@ const BLUE = '\x1b[34m'
 const WHITE = '\x1b[37m'
 
 // DO NOT EXPORT
-const LOG = (arg, color, type) => console.log(color+''+type+''+new Date().toLocaleString()+WHITE+':'+color, arg)
+const LOG = (arg, color, type) => console.log(color+''+type+' '+new Date().toLocaleString()+WHITE+':'+color, arg)
 
 const out = (arg) => LOG(arg, WHITE, 'LOG')
 const debug = (arg) => LOG(arg, GREEN, 'DEBUG')
