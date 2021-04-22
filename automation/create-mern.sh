@@ -99,4 +99,4 @@ echo -e ${WHITE}"If you are having problems w/ running your app, use $ pkill -9 
 
 # frontend
 create-react-app $CLIENT
-echo "done😃"
+echo "yay done😃"
