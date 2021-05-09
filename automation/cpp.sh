@@ -1,44 +1,98 @@
-# used to create C++ projects
+# used to create C projects
 
-# no project name specified
-if [ -z "$1" ]; then
-    echo "USAGE"
-    echo "$ ./cpp.sh <PROJECT_NAME>"
-    exit
-fi
+# no arg will default to 'MyProj'
+PROJ_DIR=${1:-"MyProj"}
 
 # prompt for the main file
-echo "Name of main File: "
-read MAIN
-if [ -z "$MAIN" ]; then
-    echo "Provide a name to your main file! "
-    echo "exiting"
-    exit
-fi
+MAIN="main.cpp"
 
 # create project w/ <PROJECT_NAME>
-mkdir $1
-echo "#include <iostream>">>$1"/"$MAIN".cpp"
-echo "">>$1"/"$MAIN".cpp"
-echo "using namespace std;">>$1"/"$MAIN".cpp"
-echo "">>$1"/"$MAIN".cpp"
-echo "template<class E>">>$1"/"$MAIN".cpp"
-echo "void log(const E& e){cout<<e<<endl;}">>$1"/"$MAIN".cpp"
-echo "">>$1"/"$MAIN".cpp"
-echo "int main(int argc, char*argv[])">>$1"/"$MAIN".cpp"
-echo "{">>$1"/"$MAIN".cpp"
-echo "      return 0;">>$1"/"$MAIN".cpp"
-echo "}">>$1"/"$MAIN".cpp"
+mkdir $PROJ_DIR
+echo '
+#include <iostream>
+
+using namespace std;
+
+template <class E>
+void log(const E& e){cout<<e<<endl;}
+
+int main(int argc, char** argv)
+{
+    log("hello world");
+    return 0;
+}
+
+'>>$PROJ_DIR"/"$MAIN
+
+# create vscode debuger
+VSCODE="$PROJ_DIR/.vscode"
+mkdir $VSCODE
+
+echo '{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "g++ - Build and debug active file",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/a.out",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "C/C++: g++ build active file",
+            "miDebuggerPath": "/usr/bin/gdb"
+        }
+    ]
+}'> "$VSCODE/launch.json"
+
+echo '{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "C/C++: g++ build active file",
+            "command": "g++",
+            "type": "shell",
+            "args": 
+            [
+                "-g", 
+                "main.cpp",
+                "-Wall"
+            ],
+            "problemMatcher": [
+                "$tsc"
+            ],
+            "presentation": {
+                "reveal": "always"
+            },
+            "group": "build"
+        }
+    ]
+}' >"$VSCODE/tasks.json"
+
 
 # create runner
-echo "rm -rf *.out">>"$1/run.sh"
-echo "g++ -g *.cpp -Wall">>"$1/run.sh"
-echo "./a.out">>"$1/run.sh"
-echo "rm -rf *.out">>"$1/run.sh"
+echo "
+rm -rf *.out
+g++ -g main.cpp -Wall
+./a.out
+rm -rf *.out">>"$PROJ_DIR/run.sh"
+
+# gitignore
+echo "*.out" >>"$PROJ_DIR/.gitignore"
 
 # runner usage
-echo "Use $1/run.sh to run your program"
-echo "1. $ cd $1"
+echo "Use $PROJ_DIR/run.sh to run your program"
+echo "1. $ cd $PROJ_DIR"
 echo "2. $ ./run.sh"
 
 # done 
