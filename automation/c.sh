@@ -1,39 +1,93 @@
 # used to create C projects
 
-# no project name specified
-if [ -z "$1" ]; then
-    echo "USAGE"
-    echo "$ ./c.sh <PROJECT_NAME>"
-    exit
-fi
+# no arg will default to 'MyProj'
+PROJ_DIR=${1:-"MyProj"}
 
 # prompt for the main file
-echo "Name of main File: "
-read MAIN
-if [ -z "$MAIN" ]; then
-    echo "Provide a name to your main file! "
-    echo "exiting"
-    exit
-fi
+MAIN="main.c"
 
 # create project w/ <PROJECT_NAME>
-mkdir $1
-echo "#include <stdio.h>">>$1"/"$MAIN".c"
-echo "">>$1"/"$MAIN".c"
-echo "int main(int argc, char*argv[])">>$1"/"$MAIN".c"
-echo "{">>$1"/"$MAIN".c"
-echo "      return 0;">>$1"/"$MAIN".c"
-echo "}">>$1"/"$MAIN".c"
+mkdir $PROJ_DIR
+echo '
+#include <stdio.h>
+
+int main(int argc, char** argv)
+{
+    printf("hello world\n");
+    return 0;
+}
+
+'>>$PROJ_DIR"/"$MAIN
+
+# create vscode debuger
+VSCODE="$PROJ_DIR/.vscode"
+mkdir $VSCODE
+
+echo '{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "gcc - Build and debug active file",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/a.out",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "C/C++: gcc build active file",
+            "miDebuggerPath": "/usr/bin/gdb"
+        }
+    ]
+}'> "$VSCODE/launch.json"
+
+echo '{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "C/C++: gcc build active file",
+            "command": "gcc",
+            "type": "shell",
+            "args": 
+            [
+                "-g", 
+                "*.c",
+                "-lm"
+            ],
+            "problemMatcher": [
+                "$tsc"
+            ],
+            "presentation": {
+                "reveal": "always"
+            },
+            "group": "build"
+        }
+    ]
+}' >"$VSCODE/tasks.json"
+
 
 # create runner
-echo "rm -rf *.out">>"$1/run.sh"
-echo "gcc -g *.c -lm -Wall">>"$1/run.sh"
-echo "./a.out">>"$1/run.sh"
-echo "rm -rf *.out">>"$1/run.sh"
+echo "
+rm -rf *.out
+gcc -g *.c -lm -Wall
+./a.out
+rm -rf *.out">>"$PROJ_DIR/run.sh"
+
+# gitignore
+echo "*.out" >>"$PROJ_DIR/.gitignore"
 
 # runner usage
-echo "Use $1/run.sh to run your program"
-echo "1. $ cd $1"
+echo "Use $PROJ_DIR/run.sh to run your program"
+echo "1. $ cd $PROJ_DIR"
 echo "2. $ ./run.sh"
 
 # done 
