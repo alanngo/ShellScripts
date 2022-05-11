@@ -5,11 +5,60 @@ YELLOW='\u001b[33m'
 
 # usage
 DIR=${1:-"."}
+SRC="src"
+PY=$DIR"/"$SRC
 echo "creating flask project..."
 
 if [ $DIR != "." ]; then
   mkdir $DIR
 fi
+mkdir $PY
+
+# create makefile
+echo '
+install:
+	pip3 install -r requirements.txt
+
+test:
+	python3 src/test/tests.py
+
+run:
+	python3 src/app.py'>> $DIR"/Makefile"
+
+# READ ME
+echo '
+# Flask App (requires python 3.8)
+
+## Prerequisites
+```bash
+$ make install
+```
+## How To Run Main App
+```bash
+$ make run
+```
+
+## How To Run Unit Tests
+```bash
+$ make test
+```
+
+## File Structure
+
+``src/app.py`` main file
+
+``src/api/``  API routes go here
+
+``src/exception/`` contains all user-defined exception
+
+``src/repository/``  DB config goes here
+
+``src/service/`` bussiness logic goes here
+
+``src/test/``  unit tests go here
+
+``src/util/`` contains default exception handler and helper files/constants/functions go here
+' >> $DIR"/README.md"
 
 # main app
 echo "
@@ -28,7 +77,7 @@ if __name__ == '__main__':
     CORS(app) # lets other programs consume app
     app.debug = True
     app.run()
-" >> $DIR"/app.py"
+" >> "$PY/app.py"
 
 # create .gitignore
 echo -e "${BLUE}Creating $DIR/.gitignore"
@@ -52,20 +101,20 @@ pymongo==3.11.0" >> $DIR"/requirements.txt"
 # create subdirectories
 SUB_DIR=("api" "repository" "exception" "service" "test" "util")
 for E in ${SUB_DIR[*]}; do
-    echo -e "${BLUE}Creating $DIR"/"$E" && mkdir $DIR"/"$E   
+    echo -e "${BLUE}Creating $PY"/"$E" && mkdir $PY"/"$E   
 done
 
 # database cradentials
-echo -e "${BLUE}Creating $DIR/repository/database.py"
+echo -e "${BLUE}Creating $PY/repository/database.py"
 echo "
 DATABASE = 'ENTER DB NAME HERE'
 HOST = 'ENTER HOST HERE'
 PORT = 'ENTER PORT HERE' # enter as an int value
 URI = 'ENTER DB URI HERE'
-" >> $DIR"/repository/database.py"
+" >> $PY"/repository/database.py"
 
 # create unit tests
-echo -e "${BLUE}Creating $DIR/test/tests.py"
+echo -e "${BLUE}Creating $PY/test/tests.py"
 echo "
 import unittest
 
@@ -78,7 +127,7 @@ class MyTestCase(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
-">>$DIR"/test/tests.py"
+">>$PY"/test/tests.py"
 
 # create error logging file
 echo "import logging
@@ -91,8 +140,8 @@ logger.addHandler(logging.StreamHandler())
 def log(exception):
     ex_name = type(exception).__name__
     message = f'{ex_name}: {exception}'
-    logger.debug(message)
-" >>$DIR"/util/logger.py"
+    logger.error(message)
+" >>$PY"/util/logger.py"
 
 
 echo "from flask import Blueprint
@@ -107,7 +156,7 @@ def handle_general_error(e: Exception):
     log(e)
     message = str(e)
     return {f'{type(e).__name__}': message}, 400
-" >>$DIR"/util/error_advice.py"
+" >>$PY"/util/error_advice.py"
 
 # getting started
 echo -e "${YELLOW}Prerequisites:
