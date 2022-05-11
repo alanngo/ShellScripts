@@ -1,0 +1,6 @@
+
+DATABASE = 'ENTER DB NAME HERE'
+HOST = 'ENTER HOST HERE'
+PORT = 'ENTER PORT HERE' # enter as an int value
+URI = 'ENTER DB URI HERE'
+
