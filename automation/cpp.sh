@@ -1,4 +1,4 @@
-# used to create C projects
+# used to create C++ projects
 
 # no arg will default to 'MyProj'
 PROJ_DIR=${1:-"MyProj"}
@@ -37,10 +37,20 @@ echo '
 #include <ctime>
 #include <string>
 #include <algorithm>
+
 using namespace std;
 #define SPACE " "
 #define COLON ":"
 #define NEWLINE (*new string("\n"))[0]
+
+// colors
+#define RED "\x1B[31m"
+#define GREEN "\x1B[32m"
+#define YELLOW "\x1B[33m"
+#define BLUE "\x1B[34m"
+#define PURPLE "\x1B[35m"
+#define BLACK "\u001b[41m"
+#define RESET "\u001b[0m"
 
 string getTime()
 {
@@ -56,27 +66,25 @@ string getTime()
     ret += SPACE;
     return ret + "] --- ";
 }
+template <class E>
+void print(
+    ostream &o,
+    const string &color,
+    const string &type,
+    const string &fi,
+    const E &arg) { o << color << getTime() << "[" << fi << "] " << type << COLON << SPACE << arg << RESET << endl; }
 
-
-// colors
-#define RED "\x1B[31m"
-#define GREEN "\x1B[32m"
-#define YELLOW "\x1B[33m"
-#define BLUE "\x1B[34m"
-#define PURPLE "\x1B[35m"
-#define BLACK "\u001b[41m"
-#define RESET "\u001b[0m"
-
-#define MY_PRINT(arg, color, type) cout << color << getTime() << "["<<__FILE__<<"] " << type << COLON << SPACE << arg << RESET << endl;
+#define PRINT(arg, color, type) print(cout, color, type, __FILE__, arg);
+#define ERR(arg, color, type) print(cerr, color, type, __FILE__, arg);
 
 // MACROs to use
-#define LOG(arg) cout << arg << endl;
-#define TRACE(arg) MY_PRINT(arg, PURPLE, "TRACE" )
-#define DEBUG(arg) MY_PRINT(arg, GREEN, "DEBUG")
-#define INFO(arg) MY_PRINT(arg, BLUE, "INFO")
-#define WARN(arg) MY_PRINT(arg, YELLOW, "WARN")
-#define ERROR(arg) MY_PRINT(arg, RED, "ERROR")
-#define FATAL(arg) MY_PRINT(arg, BLACK, "FATAL")
+#define LOG(arg) clog << arg << endl;
+#define TRACE(arg) PRINT(arg, PURPLE, "TRACE")
+#define DEBUG(arg) PRINT(arg, GREEN, "DEBUG")
+#define INFO(arg) PRINT(arg, BLUE, "INFO")
+#define WARN(arg) PRINT(arg, YELLOW, "WARN")
+#define ERROR(arg) ERR(arg, RED, "ERROR")
+#define FATAL(arg) ERR(arg, BLACK, "FATAL")
 
 #endif
 
