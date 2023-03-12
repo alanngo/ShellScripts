@@ -28,6 +28,7 @@ int main(int argc, char** argv)
 
 # create console.hpp
 echo '
+
 // https://www.lihaoyi.com/post/BuildyourownCommandLinewithANSIescapecodes.html
 #ifndef CONSOLE_H
 #define CONSOLE_H
@@ -39,9 +40,12 @@ echo '
 #include <algorithm>
 
 using namespace std;
+using namespace chrono;
+
+
 #define SPACE " "
 #define COLON ":"
-#define NEWLINE (*new string("\n"))[0]
+#define NEWLINE "\n"[0]
 
 // colors
 #define RED "\x1B[31m"
@@ -55,8 +59,8 @@ using namespace std;
 string getTime()
 {
     // Some computation here
-    auto end = chrono::system_clock::now();
-    time_t end_time = chrono::system_clock::to_time_t(end);
+    auto end = system_clock::now();
+    time_t end_time = system_clock::to_time_t(end);
 
     // to string
     stringstream ss;
@@ -64,7 +68,7 @@ string getTime()
     string ret = "[ " + ss.str();
     ret.erase(std::remove(ret.begin(), ret.end(), NEWLINE), ret.cend());
     ret += SPACE;
-    return ret + "] --- ";
+    return ret + "]";
 }
 template <class E>
 void print(
@@ -72,7 +76,7 @@ void print(
     const string &color,
     const string &type,
     const string &fi,
-    const E &arg) { o << color << getTime() << "[" << fi << "] " << type << COLON << SPACE << arg << RESET << endl; }
+    const E &arg) { o << color << getTime()<<" --- " << "[" << fi << "] " << type << COLON << SPACE << arg << RESET << endl; }
 
 #define PRINT(arg, color, type) print(cout, color, type, __FILE__, arg);
 #define ERR(arg, color, type) print(cerr, color, type, __FILE__, arg);
