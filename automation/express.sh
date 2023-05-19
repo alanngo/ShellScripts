@@ -35,27 +35,28 @@ function createJS()
 }
     '>> $PROJECT'/package.json'
     
-    echo 'import express from "express"
+    echo '
+import express, { json, urlencoded } from "express"
 import cors from "cors"
 import dotenv from "dotenv"
 
 dotenv.config()
 const HOST = process.env.HOST || "localhost"
-const PORT = process.env.PORT||3200
+const PORT = process.env.PORT || 3200
 const APP = express()
 
 // set up body parser
-const BODY_PARSER ={ extended: true }
+const BODY_PARSER = { extended: true }
 APP.use(cors())
-APP.use(express.json(BODY_PARSER))
-APP.use(express.urlencoded(BODY_PARSER))
+APP.use(json(BODY_PARSER))
+APP.use(urlencoded(BODY_PARSER))
 
-APP.get(`/`, (req, res) =>
-{
-    res.json({mssg: "spongebob is the best cartoon ever"})
+APP.get(`/`, (req, res) => {
+    res.json({ mssg: "spongebob is the best cartoon ever" })
 })
 
-APP.listen(PORT, () => console.log(`http://${HOST}:${PORT}`))' >>$PROJECT'/src/index.js'
+APP.listen(PORT, () => console.log(`http://${HOST}:${PORT}`))
+    ' >>$PROJECT'/src/index.js'
     
 }
 
@@ -115,7 +116,7 @@ app.listen(PORT, (): void => console.log(`http://${HOST}:${PORT}`))'>>$PROJECT'/
 }
 echo "use typescript? y/n"
 read USETS
-if [[ $USETS == "y" || $USETS == "y" || -z $USETS ]]; then
+if [[ $USETS == "y" || $USETS == "Y" || -z $USETS ]]; then
   createTS
 else
   createJS
