@@ -223,7 +223,7 @@ public:
      */
     TestSuite(const TestSuite &) = delete;
     /**
-     * @dontinclude move constructor constructor
+     * @dontinclude move constructor
      */
     TestSuite(TestSuite &&) = delete;
 
