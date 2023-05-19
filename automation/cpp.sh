@@ -78,10 +78,11 @@ void print(
     const string &fi,
     const E &arg) { o << color << getTime()<<" --- " << "[" << fi << "] " << type << COLON << SPACE << arg << RESET << endl; }
 
-#define PRINT(arg, color, type) print(cout, color, type, __FILE__, arg);
+#define PRINT(arg, color, type) print(clog, color, type, __FILE__, arg);
 #define ERR(arg, color, type) print(cerr, color, type, __FILE__, arg);
 
 // MACROs to use
+
 #define LOG(arg) clog << arg << endl;
 #define TRACE(arg) PRINT(arg, PURPLE, "TRACE")
 #define DEBUG(arg) PRINT(arg, GREEN, "DEBUG")
@@ -93,6 +94,242 @@ void print(
 #endif
 
 '>>$PROJ_DIR"/console.hpp"
+
+# create a test suite
+mkdir "$PROJ_DIR/TestSuite"
+echo '
+#ifndef TEST_SUITE
+#define TEST_SUITE
+#include <iostream>
+#include <string>
+using namespace std;
+class TestSuite
+{
+private:
+    int num;
+    int pass;
+    int fail;
+    const string desc;
+    ostream &os;
+
+#define FAIL false
+#define PASS true
+#define NULLPTR 0
+#define NOTNULLPTR 1
+
+    void newline()
+    {
+        os << endl;
+    }
+    void resolve(const bool &b)
+    {
+        if (b)
+            pass++;
+        else
+            fail++;
+        num++;
+    }
+    template <class E>
+    void failTest(const E &expected, const E &actual)
+    {
+        os << "❌ TEST " << num << " FAILED! Expected " << expected << " Got " << actual << endl;
+        resolve(FAIL);
+    }
+    template <class E>
+    void failTest(const E &expected, const E &actual, int x)
+    {
+        os << "❌ TEST " << num << " FAILED! Expected value other than " << expected << " Got " << actual << endl;
+        resolve(FAIL);
+    }
+    void failTest(const bool &statement)
+    {
+        os << "❌ TEST " << num << " FAILED! Statement should be " << (statement ? "true" : "false") << endl;
+        resolve(FAIL);
+    }
+    void failTest(const int &n)
+    {
+        os << "❌ TEST " << num << " FAILED!, Object " << (n == NULLPTR ? "should" : "should not") << " be nullptr" << endl;
+        resolve(FAIL);
+    }
+    void passTest()
+    {
+        os << "✅ Test " << num << " passed" << endl;
+        resolve(PASS);
+    }
+
+public:
+    /**
+     * Generates a test suite w/ custom description
+     * @param d description of test suite
+     * @param o output stream buffer to write report to, defaults to clog
+     */
+    TestSuite(const string &, ostream &);
+
+    /**
+     * Generates default test suite and prints result to clog
+     */
+    TestSuite() : TestSuite("Sample Test", clog) {}
+
+    /**
+     * Assert equals
+     * @param expected expected value
+     * @param actual actual value
+     */
+    template <class E>
+    void assertEq(const E &, const E &);
+
+    /**
+     * Assert Not equals
+     * @param expected expected value
+     * @param actual actual value
+     */
+    template <class E>
+    void assertNotEq(const E &, const E &);
+
+    /**
+     * Assert true
+     * @param condition should be true
+     */
+    void assertTrue(const bool &);
+
+    /**
+     * Assert false
+     * @param condition should be false
+     */
+    void assertFalse(const bool &);
+
+    /**
+     * Assert Null or nullptr
+     * @param ptr should point to NULL or nullptr
+     */
+    template <class E>
+    void assertNull(E *);
+
+    /**
+     * Assert not Null or nullptr
+     * @param ptr should NOT point to NULL or nullptr
+     */
+    template <class E>
+    void assertNotNull(E *);
+
+    /**
+     * prints final report for test suite
+     */
+    ~TestSuite();
+
+    // EXCLUDE
+    /**
+     * @dontinclude copy constructor
+     */
+    TestSuite(const TestSuite &) = delete;
+    /**
+     * @dontinclude move constructor constructor
+     */
+    TestSuite(TestSuite &&) = delete;
+
+    /**
+     * @dontinclude prevent heap allocation
+     */
+    void *operator new(size_t) = delete;
+
+    /**
+     * @dontinclude prevent dynamic array allocation
+     */
+    void *operator new[](size_t) = delete;
+
+    /**
+     * @dontinclude prevent heap deallocation
+     */
+    void operator delete(void *) = delete;
+
+    /**
+     * @dontinclude prevent dynamic array deallocation
+     */
+    void operator delete[](void *) = delete;
+};
+#include "TestSuite.cpp"
+#endif
+' >> "$PROJ_DIR/TestSuite/TestSuite.hpp"
+
+echo '
+#include "TestSuite.hpp"
+TestSuite::TestSuite(const string &d, ostream &o =clog) : num(0), pass(0), fail(0), desc(d), os(o)
+{
+    newline();
+    os << "======== 🧪 Test Suite 🧪 ========" << endl;
+    os << "Description: " << desc << endl;
+    os << "==================================" << endl;
+    newline();
+}
+
+template <class E>
+void TestSuite::assertEq(const E &expected, const E &actual)
+{
+    if (expected == actual)
+        passTest();
+    else
+        failTest(expected, actual);
+}
+
+template <class E>
+void TestSuite::assertNotEq(const E &expected, const E &actual)
+{
+    if (expected != actual)
+        passTest();
+    else
+        failTest(expected, actual, 1);
+}
+
+void TestSuite::assertTrue(const bool &condition)
+{
+    if (condition)
+        passTest();
+    else
+        failTest(true);
+}
+
+void TestSuite::assertFalse(const bool &condition)
+{
+    if (!condition)
+        passTest();
+    else
+        failTest(false);
+}
+
+template <class E>
+void TestSuite::assertNull(E *ptr)
+{
+    if (ptr == nullptr || ptr == NULL)
+        passTest();
+    else
+        failTest(NULLPTR);
+}
+
+template <class E>
+void TestSuite::assertNotNull(E *ptr)
+{
+    if (ptr != nullptr || ptr != NULL)
+        passTest();
+    else
+        failTest(NOTNULLPTR);
+}
+
+TestSuite::~TestSuite()
+{
+    newline();
+    os << "Final Report: " << desc << endl;
+    os << "==================================" << endl;
+    if (pass > 0)
+        os << "Passed " << pass << "/" << num << " tests ✅" << endl;
+    if (fail > 0)
+        os << "Failed " << fail << "/" << num << " tests ❌" << endl;
+    os << "Total Tests: " << num << endl;
+    os << "==================================" << endl;
+    newline();
+}
+
+' >> "$PROJ_DIR/TestSuite/TestSuite.cpp"
+
 
 # create vscode debuger
 VSCODE="$PROJ_DIR/.vscode"
@@ -153,7 +390,7 @@ echo '{
 # create runner
 echo "
 rm -rf *.out
-g++ -g main.cpp -Wall
+g++ -g main.cpp -Wall -fsanitize=undefined -fsanitize=address
 ./a.out
 rm -rf *.out">>"$PROJ_DIR/run.sh"
 
