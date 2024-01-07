@@ -28,8 +28,6 @@ int main(int argc, char** argv)
 
 # create console.hpp
 echo '
-
-
 // https://www.lihaoyi.com/post/BuildyourownCommandLinewithANSIescapecodes.html
 #ifndef CONSOLE_H
 #define CONSOLE_H
