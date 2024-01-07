@@ -29,6 +29,7 @@ int main(int argc, char** argv)
 # create console.hpp
 echo '
 
+
 // https://www.lihaoyi.com/post/BuildyourownCommandLinewithANSIescapecodes.html
 #ifndef CONSOLE_H
 #define CONSOLE_H
@@ -42,12 +43,12 @@ echo '
 using namespace std;
 using namespace chrono;
 
-
 #define SPACE " "
 #define COLON ":"
 #define NEWLINE "\n"[0]
 
 // colors
+
 #define RED "\x1B[31m"
 #define GREEN "\x1B[32m"
 #define YELLOW "\x1B[33m"
@@ -70,26 +71,83 @@ string getTime()
     ret += SPACE;
     return ret + "]";
 }
-template <class E>
-void print(
-    ostream &o,
-    const string &color,
-    const string &type,
-    const string &fi,
-    const E &arg) { o << color << getTime()<<" --- " << "[" << fi << "] " << type << COLON << SPACE << arg << RESET << endl; }
 
-#define PRINT(arg, color, type) print(clog, color, type, __FILE__, arg);
-#define ERR(arg, color, type) print(cerr, color, type, __FILE__, arg);
+using str = const string &;
 
-// MACROs to use
+/**
+ * basic logging
+ * @param o output stream
+ * @param args variadic printable arguments
+ * @return output stream
+ */
+template <class... Args>
+ostream &log(ostream &o, Args &&...args)
+{
+    ([&]
+     { o << forward<Args>(args) << " "; }(),
+     ...);
+    return o;
+}
+/**
+ * prints date, time, calling file, log level and args
+ * @param o output stream
+ * @param color color of text
+ * @param type TRACE | DEBUG | INFO | WARN |ERROR | FATAL
+ * @param fi current file that is calling
+ * @param args variadic printable arguments
+ */
+template <class... Args>
+void print(ostream &o, str color, str type, str fi, Args &&...args)
+{
+    o << color << getTime() << " --- "
+      << "[" << fi << "] " << type << COLON << SPACE;
+    log(o, args...);
+    o << RESET << endl;
+}
 
-#define LOG(arg) clog << arg << endl;
-#define TRACE(arg) PRINT(arg, PURPLE, "TRACE")
-#define DEBUG(arg) PRINT(arg, GREEN, "DEBUG")
-#define INFO(arg) PRINT(arg, BLUE, "INFO")
-#define WARN(arg) PRINT(arg, YELLOW, "WARN")
-#define ERROR(arg) ERR(arg, RED, "ERROR")
-#define FATAL(arg) ERR(arg, BLACK, "FATAL")
+// only use these for printing
+
+/**
+ * default logging
+ * @param ... arguments
+ */
+#define LOG(...) log(clog, __VA_ARGS__) << endl;
+
+/**
+ * trace log level
+ * @param ... arguments
+ */
+#define TRACE(...) print(clog, PURPLE, "TRACE", __FILE__, __VA_ARGS__)
+
+/**
+ * debug log level
+ * @param ... arguments
+ */
+#define DEBUG(...) print(clog, GREEN, "DEBUG", __FILE__, __VA_ARGS__)
+
+/**
+ * info log level
+ * @param ... arguments
+ */
+#define INFO(...) print(clog, BLUE, "INFO", __FILE__, __VA_ARGS__)
+
+/**
+ * warning log level
+ * @param ... arguments
+ */
+#define WARN(...) print(clog, YELLOW, "WARN", __FILE__, __VA_ARGS__)
+
+/**
+ * error log level (uses stderr)
+ * @param ... arguments
+ */
+#define ERROR(...) print(cerr, RED, "ERROR", __FILE__, __VA_ARGS__)
+
+/**
+ * fatal log level (uses stderr)
+ * @param ... arguments
+ */
+#define FATAL(...) print(cerr, BLACK, "FATAL", __FILE__, __VA_ARGS__)
 
 #endif
 
