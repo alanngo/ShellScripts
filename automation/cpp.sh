@@ -28,6 +28,7 @@ int main(int argc, char** argv)
 
 # create console.hpp
 echo '
+
 // https://www.lihaoyi.com/post/BuildyourownCommandLinewithANSIescapecodes.html
 #ifndef CONSOLE_H
 #define CONSOLE_H
@@ -71,6 +72,7 @@ string getTime()
 }
 
 using str = const string &;
+using num = const int &;
 
 /**
  * basic logging
@@ -92,13 +94,15 @@ ostream &log(ostream &o, Args &&...args)
  * @param color color of text
  * @param type TRACE | DEBUG | INFO | WARN |ERROR | FATAL
  * @param fi current file that is calling
+ * @param line line number from callee
  * @param args variadic printable arguments
+ * @example [ Wed Feb 14 05:56:58 2024 ] --- [src/tests/file_logger_tests.cpp:7] TRACE: im a pickle 2
  */
 template <class... Args>
-void print(ostream &o, str color, str type, str fi, Args &&...args)
+void print(ostream &o, str color, str type, str fi, num line, Args &&...args)
 {
     o << color << getTime() << " --- "
-      << "[" << fi << "] " << type << COLON << SPACE;
+      << "[" << fi << ":" << line << "] " << type << COLON << SPACE;
     log(o, args...);
     o << RESET << endl;
 }
@@ -109,46 +113,45 @@ void print(ostream &o, str color, str type, str fi, Args &&...args)
  * default logging
  * @param ... arguments
  */
-#define LOG(...) log(clog, __VA_ARGS__) << endl;
+#define LOG(...) log(clog, __VA_ARGS__) << endl
 
 /**
  * trace log level
  * @param ... arguments
  */
-#define TRACE(...) print(clog, PURPLE, "TRACE", __FILE__, __VA_ARGS__)
+#define TRACE(...) print(clog, PURPLE, "TRACE", __FILE__, __LINE__, __VA_ARGS__)
 
 /**
  * debug log level
  * @param ... arguments
  */
-#define DEBUG(...) print(clog, GREEN, "DEBUG", __FILE__, __VA_ARGS__)
+#define DEBUG(...) print(clog, GREEN, "DEBUG", __FILE__, __LINE__, __VA_ARGS__)
 
 /**
  * info log level
  * @param ... arguments
  */
-#define INFO(...) print(clog, BLUE, "INFO", __FILE__, __VA_ARGS__)
+#define INFO(...) print(clog, BLUE, "INFO", __FILE__, __LINE__, __VA_ARGS__)
 
 /**
  * warning log level
  * @param ... arguments
  */
-#define WARN(...) print(clog, YELLOW, "WARN", __FILE__, __VA_ARGS__)
+#define WARN(...) print(clog, YELLOW, "WARN", __FILE__, __LINE__, __VA_ARGS__)
 
 /**
  * error log level (uses stderr)
  * @param ... arguments
  */
-#define ERROR(...) print(cerr, RED, "ERROR", __FILE__, __VA_ARGS__)
+#define ERROR(...) print(cerr, RED, "ERROR", __FILE__, __LINE__, __VA_ARGS__)
 
 /**
  * fatal log level (uses stderr)
  * @param ... arguments
  */
-#define FATAL(...) print(cerr, BLACK, "FATAL", __FILE__, __VA_ARGS__)
+#define FATAL(...) print(cerr, BLACK, "FATAL", __FILE__, __LINE__, __VA_ARGS__)
 
 #endif
-
 '>>$PROJ_DIR"/console.hpp"
 
 # create a test suite
