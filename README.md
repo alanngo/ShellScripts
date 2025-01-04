@@ -46,6 +46,14 @@ VAR="sanjna" # declaring a variable explicitly
 echo $VAR # referencing a declared variable
 ```
 
+<b><i>Storing Outputs in Variables</i></b>
+
+```shell
+# use $(command) to store output of 'command' in a astring
+MESSAGE="Hello $(whoami), you are currently in $(pwd)"
+echo $MESSAGE 
+```
+
 <b><i>Numerical values</i></b>
 
 ```shell
@@ -359,7 +367,7 @@ function foo() # defining foo by using 'function keyword'
     ... # do stuff
 }
 
-foo # calling foo DO NOT USE ()
+foo # calling foo
 ```
 
 Defining and calling a function with arguments
@@ -372,7 +380,7 @@ function foo()
     ...
 }
 
-foo # calling foo DO NOT USE ()
+foo  "abc" "def" # calling foo with arguments
 ```
 
 Returning a value from a function
